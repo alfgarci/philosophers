@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 19:15:59 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 13:05:01 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:30:23 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ static void	eat(t_philo *philo, t_instance *ins)
 	{
 		if ((get_time_ms() - time_aux) >= ins->time_eat)
 			break ;
-		usleep(5);
+		usleep(50);
 	}
-	add_num_eat(ins, philo);
+	pthread_mutex_lock(&(ins->eating_mutex));
+	philo->eats++;
+	pthread_mutex_unlock(&(ins->eating_mutex));
 	pthread_mutex_unlock(&(ins->forks[philo->right]));
 	pthread_mutex_unlock(&(ins->forks[philo->left]));
 }
@@ -55,7 +57,7 @@ static void	*rutine(void *void_philosopher)
 		{
 			if ((get_time_ms() - time_aux) >= ins->time_eat)
 				break ;
-			usleep(5);
+			usleep(50);
 		}
 		print_msg(get_act_time(ins), philo->id, THINK, ins);
 	}
@@ -73,7 +75,7 @@ void	run_threads(t_instance *ins)
 		pthread_create(&(ins->arr_philo[i].th), NULL,
 			rutine, &(ins->arr_philo[i]));
 		i += 2;
-		usleep(200);
+		usleep(1000);
 	}
 	i = 1;
 	while (i < ins->num_philos)
@@ -82,6 +84,6 @@ void	run_threads(t_instance *ins)
 		pthread_create(&(ins->arr_philo[i].th), NULL,
 			rutine, &(ins->arr_philo[i]));
 		i += 2;
-		usleep(200);
+		usleep(1000);
 	}
 }

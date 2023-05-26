@@ -6,17 +6,16 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:40:05 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 13:06:44 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:21:36 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	check_all_ate(t_instance *ins, t_philo *philos)
+static void	check_all_ate(t_instance *ins)
 {
 	int	i;
 
-	(void)philos;
 	i = 0;
 	while (ins->num_eats != -1
 		&& i < ins->num_philos && get_num_eat(ins, i) >= (ins->num_eats - 1))
@@ -57,6 +56,6 @@ void	checker(t_instance *ins)
 			}	
 			usleep(5);
 		}
-		check_all_ate(ins, philos);
+		check_all_ate(ins);
 	}
 }

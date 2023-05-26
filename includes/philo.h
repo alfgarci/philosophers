@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:29:26 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 13:05:23 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:26:14 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void		set_death(t_instance *ins, int state);
 int			get_all_eat(t_instance *ins);
 void		set_all_eat(t_instance *ins, int state);
 int			get_num_eat(t_instance *ins, int i);
-void		add_num_eat(t_instance *ins, t_philo *philo);
 
 /*utils.c*/
 int			ft_atoi(const char *str);
