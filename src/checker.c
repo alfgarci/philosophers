@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:40:05 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 12:31:18 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:44:51 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	checker(t_instance *ins)
 			if (get_death(ins))
 			{	
 				pthread_mutex_unlock(&(ins->forks[philos->right]));
-				pthread_mutex_unlock(&(ins->forks[philos->left]));
+				if (ins->num_philos > 1)
+					pthread_mutex_unlock(&(ins->forks[philos->left]));
 				break ;
 			}	
 			usleep(5);
