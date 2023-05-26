@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:29:26 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/21 18:07:50 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:35:35 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_instance
 	long long			init_time;
 	pthread_mutex_t		eating_mutex;
 	pthread_mutex_t		writing_mutex;
+	pthread_mutex_t		all_eat_mutex;
+	pthread_mutex_t		death_mutex;
 	pthread_mutex_t		*forks;
 	struct s_philo		*arr_philo;
 }						t_instance;
@@ -74,6 +76,12 @@ void		checker(t_instance *ins);
 /*finish.c*/
 void		finish_exe(t_instance *ins);
 void		free_philo(t_instance *ins);
+
+/*mutex_utils.c*/
+int			get_death(t_instance *ins);
+void		set_death(t_instance *ins, int state);
+int			get_all_eat(t_instance *ins);
+void		set_all_eat(t_instance *ins, int state);
 
 /*utils.c*/
 int			ft_atoi(const char *str);

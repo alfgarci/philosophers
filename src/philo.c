@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfgarci <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 19:15:59 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/13 19:16:01 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:39:57 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ static void	eat(t_philo *philo, t_instance *ins)
 	philo->last_meal = get_time_ms();
 	pthread_mutex_unlock(&(ins->eating_mutex));
 	time_aux = get_time_ms();
-	while (!(ins->death))
+	while (!get_death(ins))
 	{
 		if ((get_time_ms() - time_aux) >= ins->time_eat)
 			break ;
 		usleep(5);
 	}
 	(philo->eats)++;
-	pthread_mutex_unlock(&(ins->forks[philo->left]));
 	pthread_mutex_unlock(&(ins->forks[philo->right]));
+	pthread_mutex_unlock(&(ins->forks[philo->left]));
 }
 
 static void	*rutine(void *void_philosopher)
@@ -44,14 +44,14 @@ static void	*rutine(void *void_philosopher)
 
 	philo = (t_philo *)void_philosopher;
 	ins = philo->copy_ins;
-	while (!(ins->death))
+	while (!get_death(ins))
 	{
 		eat(philo, ins);
-		if (ins->all_ate)
+		if (get_all_eat(ins))
 			break ;
 		print_msg(get_act_time(ins), philo->id, SLEEP, ins);
 		time_aux = get_time_ms();
-		while (!(ins->death))
+		while (!get_death(ins))
 		{
 			if ((get_time_ms() - time_aux) >= ins->time_eat)
 				break ;
@@ -69,17 +69,19 @@ void	run_threads(t_instance *ins)
 	i = 0;
 	while (i < ins->num_philos)
 	{
+		ins->arr_philo[i].last_meal = get_time_ms();
 		pthread_create(&(ins->arr_philo[i].th), NULL,
 			rutine, &(ins->arr_philo[i]));
-		ins->arr_philo[i].last_meal = get_time_ms();
 		i += 2;
+		usleep(200);
 	}
 	i = 1;
 	while (i < ins->num_philos)
 	{
+		ins->arr_philo[i].last_meal = get_time_ms();
 		pthread_create(&(ins->arr_philo[i].th), NULL,
 			rutine, &(ins->arr_philo[i]));
-		ins->arr_philo[i].last_meal = get_time_ms();
 		i += 2;
+		usleep(200);
 	}
 }

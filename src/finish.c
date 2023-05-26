@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 12:42:09 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/21 17:59:26 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:36:23 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	finish_mutex(t_instance *ins)
 		pthread_mutex_destroy(&(ins->forks[i]));
 	pthread_mutex_destroy(&(ins->writing_mutex));
 	pthread_mutex_destroy(&(ins->eating_mutex));
+	pthread_mutex_destroy(&(ins->death_mutex));
+	pthread_mutex_destroy(&(ins->all_eat_mutex));
 }
 
 void	finish_exe(t_instance *ins)

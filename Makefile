@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alfgarci <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 18:06:47 by alfgarci          #+#    #+#              #
-#    Updated: 2022/12/12 10:27:46 by alfgarci         ###   ########.fr        #
+#    Updated: 2023/05/26 11:35:06 by alfgarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC 	=	${SRC_DIR}/main.c \
 			${SRC_DIR}/init.c \
 			${SRC_DIR}/philo.c \
 			${SRC_DIR}/finish.c \
+			${SRC_DIR}/mutex_utils.c \
 			${SRC_DIR}/checker.c \
 			${SRC_DIR}/utils.c 
 
@@ -32,13 +33,13 @@ OBJ 	=	${SRC:.c=.o}
 INC 	=	includes
 
 CC			=	cc
-C_FLAGS		=	-Werror -Wextra -Wall -fsanitize=thread -g
+C_FLAGS		=	-Werror -Wextra -Wall -fsanitize=thread
 H_FLAGS		=	-I${INC}
 FLAGS		=	${C_FLAGS}
 
 #---RECIPES------------------------------
 %.o : %.c
-	@${CC} ${H_FLAGS} -c $< -o $@
+	@${CC} ${H_FLAGS} ${C_FLAGS} -c $< -o $@
 
 all:	${NAME}
 

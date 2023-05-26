@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 19:15:01 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/21 17:58:03 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:36:04 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	init_mutex(t_instance *ins)
 		pthread_mutex_init(&(ins->forks[i]), NULL);
 	pthread_mutex_init(&(ins->writing_mutex), NULL);
 	pthread_mutex_init(&(ins->eating_mutex), NULL);
+	pthread_mutex_init(&(ins->all_eat_mutex), NULL);
+	pthread_mutex_init(&(ins->death_mutex), NULL);
 }
 
 static void	init_philo(t_instance *ins)
