@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:40:05 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 12:44:51 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:06:44 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static void	check_all_ate(t_instance *ins, t_philo *philos)
 {
 	int	i;
 
+	(void)philos;
 	i = 0;
 	while (ins->num_eats != -1
-		&& i < ins->num_philos && philos[i].eats >= (ins->num_eats - 1))
+		&& i < ins->num_philos && get_num_eat(ins, i) >= (ins->num_eats - 1))
 		i++;
 	if (i == ins->num_philos)
 		set_all_eat(ins, 1);
@@ -49,9 +50,9 @@ void	checker(t_instance *ins)
 			pthread_mutex_unlock(&(ins->eating_mutex));
 			if (get_death(ins))
 			{	
-				pthread_mutex_unlock(&(ins->forks[philos->right]));
 				if (ins->num_philos > 1)
-					pthread_mutex_unlock(&(ins->forks[philos->left]));
+					pthread_mutex_unlock(&(ins->forks[philos->right]));
+				pthread_mutex_unlock(&(ins->forks[philos->left]));
 				break ;
 			}	
 			usleep(5);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfgarci <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:26:01 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 11:26:05 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:04:58 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,21 @@ void    set_all_eat(t_instance *ins, int state)
 	pthread_mutex_lock(&(ins->all_eat_mutex));
     ins->all_ate = state;
 	pthread_mutex_unlock(&(ins->all_eat_mutex));   
+}
+
+int get_num_eat(t_instance *ins, int i)
+{
+    int state;
+
+	pthread_mutex_lock(&(ins->eating_mutex));
+    state = ins->arr_philo[i].eats;
+	pthread_mutex_unlock(&(ins->eating_mutex));   
+    return (state);
+}
+
+void    add_num_eat(t_instance *ins, t_philo *philo)
+{
+	pthread_mutex_lock(&(ins->eating_mutex));
+    philo->eats++;
+	pthread_mutex_unlock(&(ins->eating_mutex));   
 }

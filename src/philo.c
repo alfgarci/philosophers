@@ -6,7 +6,7 @@
 /*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 19:15:59 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/26 12:28:46 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:05:01 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	eat(t_philo *philo, t_instance *ins)
 			break ;
 		usleep(5);
 	}
-	(philo->eats)++;
+	add_num_eat(ins, philo);
 	pthread_mutex_unlock(&(ins->forks[philo->right]));
 	pthread_mutex_unlock(&(ins->forks[philo->left]));
 }
