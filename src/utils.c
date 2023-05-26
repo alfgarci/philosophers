@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfgarci <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alfgarci <alfgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 19:16:24 by alfgarci          #+#    #+#             */
-/*   Updated: 2023/05/13 19:16:25 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:11:29 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ long int	get_act_time(t_instance *ins)
 void	print_msg(long int time, int id, int act, t_instance *ins)
 {
 	pthread_mutex_lock(&(ins->writing_mutex));
-	if (!(ins->death))
+	if (!get_death(ins))
 	{
 		if (act == TAKE_FORK)
 			printf(BLUE "%li %i is has taken a fork\n", time, id);
