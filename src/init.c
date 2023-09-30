@@ -75,6 +75,7 @@ t_instance	*init_data(char **argv)
 	if (check_valid_param(ins) == 1)
 	{
 		free_philo(ins);
+		printf("error: bad format\n");
 		return (NULL);
 	}
 	ins->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)

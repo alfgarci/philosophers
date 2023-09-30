@@ -20,16 +20,13 @@ int	main(int argc, char **argv)
 	{
 		ins = init_data(argv);
 		if (!ins)
-		{
-			printf("error: malloc problem\n");
 			return (-1);
-		}
 		ins->init_time = get_time_ms();
 		run_threads(ins);
 		checker(ins);
 		finish_exe(ins);
 		return (0);
 	}
-	printf("error: Wrong number od parametres\n");
+	printf("error: Wrong number of parametres\n");
 	return (-1);
 }
